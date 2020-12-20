@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: pihole-privileged-demo
+  name: pihole-privileged
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: pihole-ftl.conf
-  namespace: pihole-privileged-demo
+  namespace: pihole-privileged
 data:
   pihole-FTL.conf: |
     MAXDBDAYS=7
@@ -17,7 +17,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: whitelist.txt
-  namespace: pihole-privileged-demo
+  namespace: pihole-privileged
 data:
   whitelist.txt: |
     ichnaea.netflix.com
@@ -28,7 +28,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: adlists.list
-  namespace: pihole-privileged-demo
+  namespace: pihole-privileged
 data:
   adlists.list: |
     https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
@@ -55,7 +55,7 @@ metadata:
   labels:
     app: pihole-privileged
   name: pihole-privileged
-  namespace: pihole-privileged-demo
+  namespace: pihole-privileged
 spec:
   replicas: 2
   selector:
@@ -78,16 +78,16 @@ spec:
         - name: WEBPASSWORD
           value: password
         - name: DNS1
-          value: 192.168.1.162
+          value: 8.8.8.8
         - name: DNS2
-          value: 192.168.1.162
+          value: 8.8.4.4
         - name: CONDITIONAL_FORWARDING
           value: 'true'
         - name: CONDITIONAL_FORWARDING_DOMAIN
-          value: webster.home
+          value: atomicmonkeyfinger.com
         - name: CONDITIONAL_FORWARDING_IP
-          value: 192.168.1.254
-        image: pihole/pihole:4.3.2-1
+          value: 10.99.0.1
+        image: pihole/pihole:latest
         imagePullPolicy: IfNotPresent
         name: pihole-privileged
         ports:
@@ -179,7 +179,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: pihole-udp
-  namespace: pihole-privileged-demo
+  namespace: pihole-privileged
   annotations:
     metallb.universe.tf/allow-shared-ip: dns
 spec:
@@ -191,13 +191,13 @@ spec:
     name: dnsudp
     targetPort: 53
   type: LoadBalancer
-  loadBalancerIP: 192.168.1.161
+  loadBalancerIP: 10.99.2.200
 ---
 kind: Service
 apiVersion: v1
 metadata:
   name: pihole-tcp
-  namespace: pihole-privileged-demo
+  namespace: pihole-privileged
   annotations:
     metallb.universe.tf/allow-shared-ip: dns
 spec:
@@ -213,4 +213,4 @@ spec:
     name: web
     targetPort: 80
   type: LoadBalancer
-  loadBalancerIP: 192.168.1.161
+  loadBalancerIP: 10.99.2.200
