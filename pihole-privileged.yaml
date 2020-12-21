@@ -87,7 +87,7 @@ spec:
           value: atomicmonkeyfinger.com
         - name: CONDITIONAL_FORWARDING_IP
           value: 10.99.0.1
-        image: pihole/pihole:4.3.2-1
+        image: pihole/pihole
         imagePullPolicy: IfNotPresent
         name: pihole-privileged
         ports:
