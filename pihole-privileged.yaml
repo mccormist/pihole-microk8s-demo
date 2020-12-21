@@ -191,7 +191,7 @@ spec:
     name: dnsudp
     targetPort: 53
   type: LoadBalancer
-  loadBalancerIP: 10.99.2.200
+  loadBalancerIP:
 ---
 kind: Service
 apiVersion: v1
@@ -213,4 +213,4 @@ spec:
     name: web
     targetPort: 80
   type: LoadBalancer
-  loadBalancerIP: 10.99.2.200
+  loadBalancerIP:

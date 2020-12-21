@@ -51,7 +51,7 @@ spec:
     name: dnsudp
     targetPort: 53
   type: LoadBalancer
-  loadBalancerIP: 192.168.1.162
+  loadBalancerIP:
 ---
 kind: Service
 apiVersion: v1
@@ -69,4 +69,4 @@ spec:
     name: dnstcp
     targetPort: 53
   type: LoadBalancer
-  loadBalancerIP: 192.168.1.162
+  loadBalancerIP:
