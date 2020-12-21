@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: unbound-demo
+  name: unbound-lox
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -9,7 +9,7 @@ metadata:
   labels:
     app: unbound
   name: unbound
-  namespace: unbound-demo
+  namespace: unbound-lox
 spec:
   replicas: 2
   selector:
@@ -39,7 +39,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: unbound-udp
-  namespace: unbound-demo
+  namespace: unbound-lox
   annotations:
     metallb.universe.tf/allow-shared-ip: dns
 spec:
@@ -57,7 +57,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: unbound-tcp
-  namespace: unbound-demo
+  namespace: unbound-lox
   annotations:
     metallb.universe.tf/allow-shared-ip: dns
 spec:
